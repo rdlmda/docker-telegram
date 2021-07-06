@@ -47,6 +47,9 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=downloader --chown=user /usr/bin/Telegram /home/user/Telegram
 
+## Fix webcam (see https://medium.com/@zwinny/docker-using-webcam-9fafb26cf1e6)
+RUN usermod -a -G irc user
+
 WORKDIR $HOME
 USER user
 
