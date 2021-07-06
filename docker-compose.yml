@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  telegram:
+    image: rdlmda/telegram
+    build: .
+    container_name: telegram
+    hostname: telegram
+    devices:
+      - /dev/dri
+      - /dev/video0
+      - /dev/video10
+    environment:
+      - DISPLAY=unix$DISPLAY
+      - PULSE_SERVER=unix:$XDG_RUNTIME_DIR/pulse/native
+      - LANG=$LANG
+      - LC_ALL=$LC_ALL
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - $XDG_RUNTIME_DIR/pulse:$XDG_RUNTIME_DIR/pulse
+      - $HOME/.tgdesktop:/home/user/.local/share/TelegramDesktop
+      - $HOME/Downloads/Telegram Desktop:/home/user/Downloads/Telegram Desktop
